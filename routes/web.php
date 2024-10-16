@@ -1,9 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laratrust\Http\Controllers\RolesAssignmentController;
 
 Route::get('/', function () {
     return view('auth/login');
+});
+Route::get('/welcome', function () {
+    return view('welcome');
 });
 
 Route::middleware([
@@ -16,3 +20,6 @@ Route::middleware([
     })->name('dashboard');
 });
 
+
+
+Route::get('/permisos', [RolesAssignmentController::class, 'index'])->middleware('role:administrador-sistema','auth', 'verified');
